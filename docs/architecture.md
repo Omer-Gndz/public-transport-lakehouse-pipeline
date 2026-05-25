@@ -2,89 +2,42 @@
 
 ## Oversikt
 
-Dette prosjektet følger en Databricks-inspirert lakehouse-arkitektur for behandling av norske kollektivtransportdata.
+Dette prosjektet følger en Databricks-inspirert lakehouse-arkitektur for behandling av norske kollektivtransportdata fra Entur.
 
-Pipelinen er bygget rundt tre hovedlag:
-
-1. Bronze
-2. Silver
-3. Gold
-
-Denne strukturen gjør prosjektet enklere å vedlikeholde, teste og videreutvikle.
+Målet er å bygge en profesjonell data engineering-pipeline som henter inn rådata, lagrer dem i et Bronze-lag, transformerer og validerer dem i et Silver-lag, og produserer analyseklare datasett i et Gold-lag.
 
 ---
 
-## Bronze-lag
+## Datakilde
 
-Bronze-laget lagrer rådata slik de mottas fra den eksterne datakilden.
+Prosjektet bruker offentlige kollektivtransportdata fra Entur.
 
-Formål:
+Første versjon av prosjektet fokuserer på statiske data, for eksempel:
 
-- bevare originale data
-- gjøre reprosessering mulig
-- skille data ingestion fra transformasjon
-- beholde en rå kopi av datagrunnlaget
+- stoppesteder
+- ruter
+- turer
+- rutetabeller
 
-Eksempler på innhold:
-
-- rå stoppested-data
-- rå rutedata
-- rå rutetabell-data
-- rå turdata
+Senere kan prosjektet utvides med sanntidsdata, for eksempel kjøretøyposisjoner og oppdaterte avgangs- og ankomsttider.
 
 ---
 
-## Silver-lag
+## Overordnet dataflyt
 
-Silver-laget inneholder rensede og validerte data.
-
-Formål:
-
-- standardisere kolonnenavn
-- korrigere datatyper
-- håndtere manglende verdier
-- identifisere eller fjerne duplikater
-- validere sentrale ID-er og relasjoner
-- forberede data for modellering
-
-Eksempler på innhold:
-
-- rensede stoppesteder
-- rensede ruter
-- rensede turer
-- rensede operatørdata
-
----
-
-## Gold-lag
-
-Gold-laget inneholder analyseklare tabeller.
-
-Formål:
-
-- støtte rapportering
-- støtte forretningsanalyse
-- gjøre data enklere å bruke med SQL
-- tilby aggregerte og modellerte datasett
-
-Eksempler på innhold:
-
-- ruteaktivitet per dag
-- stoppestedaktivitet
-- operatøroversikt
-- rutedekning og geografisk analyse
-
----
-
-## Designprinsipper
-
-Prosjektet bygger på følgende prinsipper:
-
-- modulær pipeline-struktur
-- tydelig skille mellom ingestion, transformasjon og validering
-- reproduserbar kjøring
-- datakvalitetskontroller
-- SQL-vennlig analyselag
-- cloud-ready mappestruktur
-- Databricks/lakehouse-inspirert arkitektur
-- profesjonell GitHub-workflow med main, dev og feature branches
+```text
+Entur data source
+        ↓
+Ingestion
+        ↓
+Bronze layer
+        ↓
+Transformation
+        ↓
+Silver layer
+        ↓
+Validation
+        ↓
+Gold layer
+        ↓
+SQL / Analytics
