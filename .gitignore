@@ -88,3 +88,7 @@ Prosjektet bygger på følgende prinsipper:
 - cloud-ready mappestruktur
 - Databricks/lakehouse-inspirert arkitektur
 - profesjonell GitHub-workflow med main, dev og feature branches
+
+# Raw data files
+data/bronze/entur_static/
+*.zip
