@@ -92,3 +92,7 @@ Prosjektet bygger på følgende prinsipper:
 # Raw data files
 data/bronze/entur_static/
 *.zip
+
+# Generated Silver data
+data/silver/*.parquet
+*.parquet
