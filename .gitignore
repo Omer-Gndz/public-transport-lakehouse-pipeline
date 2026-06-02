@@ -96,3 +96,5 @@ data/bronze/entur_static/
 # Generated Silver data
 data/silver/*.parquet
 *.parquet
+
+data/gold/*.parquet
